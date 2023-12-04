@@ -33,3 +33,13 @@ export interface ErrorCallback {
     (error: CustomError): void;
 }
 
+export interface SessionState {
+    session: Session;
+}
+
+
+export interface RootState {
+    session: SessionState;
+  }
+
+
