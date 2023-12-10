@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Button, Heading, FormControl, FormLabel, Input, Textarea, Spinner, Link } from '@chakra-ui/react';
+import { Box, Button, FormControl, Input,  Spinner} from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getMessages, sendMessage } from './messagesApi';
 import { useSelector } from 'react-redux';
 import { Message, RootState, Session } from '../model/common';
-import { current } from '@reduxjs/toolkit';
 
 const Chat = () => {
   const session = useSelector((state: RootState) => state.session.session);

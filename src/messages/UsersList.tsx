@@ -1,28 +1,32 @@
 import { Box, Heading, Spinner, Text } from "@chakra-ui/react"
 import { useState, useEffect } from "react";
 import { listUsers } from "./usersApi";
-import { RootState, RootUsersState, UserPublic, UsersState } from "../model/common";
-import { useDispatch, useSelector } from "react-redux";
+import { RootState, UserPublic } from "../model/common";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { SET_USERS } from "../redux";
 
 const UserList = () => {
   const {id_receiver} = useParams();
   const [users, setUsers] = useState<UserPublic[]>([]);
   const [loading, setLoading] = useState(true);
   const session = useSelector((state: RootState)=> state.session.session);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {id} = useParams();
-  const receiver_id = (id == null || id == undefined ? 0 : id) as number;
+  const receiver_id = (id == null || id == undefined ? -1 : id) as number;
 
   useEffect(() => {
+
     console.log(id_receiver)
     const fetchUsers = async () => {
       try {
         const usersData = await listUsers();
         console.log(usersData);
         setUsers(usersData);
+        const isReceiverInUsers = usersData.some((user) => user.user_id === receiver_id);
+
+        if (!isReceiverInUsers) {
+          navigate("/messages")
+        }
       } catch (error) {
         console.error("Erreur lors de la récupération des utilisateurs:", error);
       } finally {
