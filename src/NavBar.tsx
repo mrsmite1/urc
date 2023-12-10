@@ -4,6 +4,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
 import { CLEAR_SESSION } from './redux';
 import { RootState } from './model/common';
+import { kv } from '@vercel/kv';
 
 interface NavBarProps {
   isAuthenticated: boolean;
@@ -15,8 +16,9 @@ const NavBar: React.FC<NavBarProps> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onLogout = ()=>{
+  const onLogout = async ()=>{
     dispatch(CLEAR_SESSION());
+
     console.log("Déconnexion !");
     navigate("/login");
   }

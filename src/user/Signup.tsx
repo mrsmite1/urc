@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Input, Button, FormControl, FormLabel, Heading, Link } from '@chakra-ui/react';
+import { Box, Input, Button, FormControl, FormLabel, Heading, Link, Spinner } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { registerUser } from './signupApi';
 import { User } from '../model/common';
@@ -19,21 +19,24 @@ const Signup: React.FC = () => {
   const [error, setError] = useState<{ message?: string }>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [loading,setLoading] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    setLoading(true);
     // Appeler la fonction registerUser ici
     registerUser(
       registrationData,
       (session) => {
+
         // Gérer le résultat (par exemple, rediriger l'utilisateur vers une page de connexion)
         console.log('User registered successfully:', session);
+        setLoading(false);
         dispatch(SET_SESSION(session));
         navigate('/messages');
       },
       (registrationError) => {
+        setLoading(false);
         // Gérer les erreurs (par exemple, afficher un message d'erreur)
         setError({ message: registrationError.message });
       }
@@ -47,7 +50,16 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <Box p={4} maxW="xl" mx="auto" width="30%" mt="5em">
+    <Box
+    maxW="xl"
+    minWidth="500px" // Définissez la largeur minimale souhaitée
+    margin="auto" // Pour centrer la boîte horizontalement
+    p={8} // Espacement interne
+    borderWidth="1px" // Bordure
+    marginTop="20" // Ajoutez une marge en haut
+    borderRadius="md" // Bordure arrondie
+    boxShadow="md" // Ombre
+  >
       <Heading mb={4} textAlign="center" size="lg">
         Inscription
       </Heading>
@@ -81,8 +93,8 @@ const Signup: React.FC = () => {
             onChange={handleChange}
           />
         </FormControl>
-        <Button type="submit" width="100%" colorScheme="teal">
-          Inscription
+        <Button type="submit" width="100%" colorScheme="teal" disabled={loading}>
+          {loading ? <Spinner size="sm" /> : 'Inscription'}
         </Button>
       </form>
 
