@@ -44,7 +44,9 @@ const UserList = () => {
   };
 
   return (
-    <Box mt={8}  width="390px">
+    <Box
+     width={['80%', '25%']}
+     >
       {loading ? (
         // Afficher un Spinner pendant le chargement
         <Box display="flex" justifyContent="center" alignItems="center" height="30vh">

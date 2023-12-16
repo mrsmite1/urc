@@ -71,11 +71,12 @@ const Chat = () => {
 
   return (
     <Box
-      position="fixed"
+      position={['relative', 'fixed']}
       bottom="5%"
-      right="15%"
-      width="750px"
-      height="550px"
+      // right="5%"
+      left={['-15%', '40%']}
+      width={['100%', '50%']} // 100% width on mobile, 50% width on larger screens
+      height={['80vh', '70vh']}
       padding="2"
       backgroundColor="white"
       borderRadius="8px"
@@ -108,6 +109,7 @@ const Chat = () => {
               display="inline-block"  // Make the box inline so it takes only the width of the content
               minWidth="50px"
               fontSize="16"
+              maxWidth="50%"
               backgroundColor={
                 message.sender_id === session.id ? '#D2FFBD' : 'white'  // Set background color based on sender
               }

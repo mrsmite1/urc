@@ -12,7 +12,7 @@ const MessagesMenu = () => {
 
   return (
     <Box ml='100' mt='0'>
-      <Box><Chat/><UsersList/></Box>
+      <Box><UsersList/><Chat/></Box>
 
     </Box>
   )
