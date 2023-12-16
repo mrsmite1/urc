@@ -1,7 +1,7 @@
 # UBO Relay Chat
 
 ## Objectifs
-Créer une application de messagerie type IRC / WhatApp : [démo](https://urc.vercel.app/)
+Créer une application de messagerie type IRC / WhatApp : [démo](https://urc-mrsmite1.vercel.app/)
 
 TP réalisable en binômes ; mais dans ce cas, je veux un accès au repos Git pour vérifier la contribution équitable de chacun.
 
